@@ -15,3 +15,4 @@ print()
 loot = functions.chest()
 
 functions.lootScan(loot)
+functions.lootEquip(loot)
