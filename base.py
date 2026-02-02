@@ -10,14 +10,16 @@ def statsBase():
         keepStats = "N/A"
         statPoints = 10
         strength = 1
-        luck = 1
         defence = 1
         dodge = 1
         accuracy = 1
 
-        print("You have 15 stat points to spend.")
-        print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy")
-        print("Each stat starts with one stat point, so you have 10 left to use.")
+        print()
+        print()
+
+        print("You have 14 stat points to spend.")
+        print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy. \n")
+        print("Each stat except for luck starts with one stat point, so you have 10 left to use.")
 
         print()
 
@@ -35,9 +37,8 @@ def statsBase():
 
         while goodStats == False:
             try:
-                luckAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
-                luck += luckAdd
-                statPoints -= luckAdd
+                luck = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
+                statPoints -= luck
 
                 goodStats = True
             except ValueError:
@@ -96,7 +97,6 @@ def statsBase():
             
                     print("Your stats have been selected.")
                 
-                    luck -= 1
                     dodge *= 5
                     accuracy *=3
 
