@@ -34,3 +34,10 @@ class amulet:
     damage = 0
     incDamage = 0
     dodge = 0
+
+class enemy:
+    maxHealth = 0
+    damage = 0
+    incDamage = 0
+    accuracy = 0
+    dodge = 0

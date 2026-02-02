@@ -2,6 +2,7 @@ import random
 import lootTables
 import loot.current as current
 import base
+import sys
 
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
     return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
@@ -107,6 +108,30 @@ def lootAsk(loot):
             print("You have chosen not to equip this item. \n")
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")
+
+def enemyAttack(enemy):
+    global current
+
+    damage = enemy.damage - current.defence
+    current.health -= damage
+    if current.health <= 0:
+        return "loss"
+    else:
+        return "N/A"
+
+def playerAttack(enemy):
+    global current
+
+    if current.weapon.piercing == True:
+        damage = (current.strength - (enemy.defence / 2))
+    else:
+        damage = (current.strength - enemy.defence)
+    
+    if enemy.health <= 0:
+        return "victory"
+    else:
+        return "N/A"
+    
 
 def chestRoom():
     action = "N/A"
