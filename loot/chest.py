@@ -78,6 +78,7 @@ class amuletOfAgility:
     name = "amulet of agility"
     type = amulet
     dodge = 2
+    incDamage = 0
 
 class fancyBoots:
     name = "fancy boots"
@@ -100,14 +101,14 @@ class sneakers:
 class rustySword:
     name = "rusty sword"
     type = weapon
-    damage = 4
-    incDamage = 1
+    damage = 3
+    incDamage = 0
     piercing = True
 
 class chainmailHelmet:
     name = "chainmail helmet"
     type = helmet
-    defence = "2"
+    defence = 2
 
 class chainmailPants:
     name = "chainmail pants"
@@ -118,3 +119,58 @@ class chainmailChestplate:
     name = "chainmail chestplate"
     type = chestplate
     defence = 4
+
+class duelSteelDaggers:
+    name = "duel steel daggers"
+    type = weapon
+    damage = 4
+    incDamage = 0
+    piercing = True
+
+class amuletOfFire:
+    name = "amulet of fire"
+    type = amulet
+    dodge = 0
+    incDamage = 3
+
+class spikedBoots:
+    name = "spiked boots"
+    type = boots
+    defence = 3
+    dodge = 2
+
+class ironHelmet:
+    name = "iron helmet"
+    type = helmet
+    defence = 3
+
+class ironChestplate:
+    name = "iron chestplate"
+    type = chestplate
+    defence = 6
+    thorns = 0
+
+class ironPants:
+    name = "iron pants"
+    type = pants
+    defence = 4
+
+class blowgun:
+    name = "blowgun"
+    type = weapon
+    damage = 1
+    incDamage = 4
+    piercing = True
+
+class flamingStaff:
+    name = "flaming staff"
+    type = weapon
+    damage = 3
+    incDamage = 4
+    piercing = False
+
+class amuletOfTheFlamingStep:
+    name = "amulet of the flaming step"
+    type = amulet
+    dodge = 2
+    incDamage = 3
