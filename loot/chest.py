@@ -78,7 +78,6 @@ class amuletOfAgility:
     name = "amulet of agility"
     type = amulet
     dodge = 2
-    incDamage = 0
 
 class fancyBoots:
     name = "fancy boots"
@@ -131,7 +130,6 @@ class duelSteelDaggers:
 class amuletOfFire:
     name = "amulet of fire"
     type = amulet
-    dodge = 0
     incDamage = 3
 
 class spikedBoots:

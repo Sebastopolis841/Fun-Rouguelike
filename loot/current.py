@@ -30,5 +30,6 @@ class chestplate:
     thorns = 0
 
 class amulet:
+    damage = 0
     incDamage = 0
     dodge = 0

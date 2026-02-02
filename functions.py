@@ -25,8 +25,18 @@ def lootScan(loot):
         print("Defence = " + str(loot.defence))
         print("Thorns = " + str(loot.thorns))
     elif loot.type == "amulet":
-        print("Dodge = " + str(loot.dodge))
-        print("Incremental damage = " + str(loot.incDamage))
+        try:
+            print("Dodge = " + str(loot.dodge))
+        except NameError:
+            pass
+        try:
+            print("Incremental damage = " + str(loot.incDamage))
+        except NameError:
+            pass
+        try:
+            print("Damage = " +str(loot.damage))
+        except NameError:
+            pass
 
 def lootEquip(loot):
     global current
@@ -47,8 +57,18 @@ def lootEquip(loot):
         current.chestplate.defence = loot.defence
         current.chestplate.thorns = loot.thorns
     elif loot.type == "amulet":
-        current.amulet.dodge = loot.dodge
-        current.amulet.incDamage = loot.incDamage
+        try:
+            current.amulet.dodge = loot.dodge
+        except NameError:
+            current.amulet.dodge = 0
+        try:
+            current.amulet.incDamage = loot.incDamage
+        except NameError:
+            current.amulet.incDamage = 0
+        try:
+            current.amulet.damage = loot.damage
+        except NameError:
+            current.amulet.damage = 0
     else:
         print("There was an error loading your loot.")
     
