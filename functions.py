@@ -73,6 +73,7 @@ def lootEquip(loot):
             current.amulet.damage = 0
     elif loot.type == "health":
         current.health += loot.boost
+        base.health += loot.boost
     else:
         print("There was an error loading your loot.")
     
@@ -91,6 +92,7 @@ def lootEquip(loot):
     print("Dodge: " + str(current.dodge))
     print("Piercing: " + str(current.piercing))
     print("Thorns: " + str(current.thorns))
+    print("Max health: " + str(base.health))
     print("Health: " + str(current.health))
 
 def lootAsk(loot):
