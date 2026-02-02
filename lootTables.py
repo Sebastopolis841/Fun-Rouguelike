@@ -20,9 +20,18 @@ class chestLoot:
             chest.rustySword,
             chest.chainmailHelmet,
             chest.chainmailPants,
-            chest.chainmailChestplate
+            chest.chainmailChestplate,
+            chest.duelSteelDaggers,
+            chest.amuletOfFire,
+            chest.spikedBoots,
+            chest.ironHelmet,
+            chest.ironChestplate,
+            chest.ironPants,
+            chest.blowgun,
+            chest.flamingStaff,
+            chest.amuletOfTheFlamingStep
         ]
     
-    extraSpace = 5
+    extraSpace = 7
 
-    luckModifier = 0.5
+    luckModifier = 0.7
