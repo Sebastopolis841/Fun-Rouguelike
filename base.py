@@ -86,7 +86,7 @@ def statsBase():
             print("A negative value(s) has been detected. Please input valid stats.")
 
         elif statPoints == 0:
-            print("You have chosen the stats: \n \n Strength = " + str(strength) + "\n Luck = " + str(luck) + "\n Defence = " + str(defence) + "\n Dodge " + str(dodge) + "\n Accuracy " + str(accuracy) + "\n")
+            print("You have chosen the stats: \n \n Strength = " + str(strength) + "\n Luck = " + str(luck) + "\n Defence = " + str(defence) + "\n Dodge = " + str(dodge) + "\n Accuracy = " + str(accuracy) + "\n")
 
             while keepStats == "N/A":
 
