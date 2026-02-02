@@ -9,3 +9,9 @@ luck = current.luck
 defence = current.luck
 dodge = current.luck
 accuracy = current.luck
+
+print()
+
+loot = functions.chest()
+
+functions.lootScan(loot)

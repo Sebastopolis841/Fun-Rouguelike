@@ -82,7 +82,7 @@ def statsBase():
             
         goodStats = False
 
-        if strengthAdd < 0 or luckAdd < 0 or defenceAdd < 0 or dodgeAdd < 0:
+        if strengthAdd < 0 or luck < 0 or defenceAdd < 0 or dodgeAdd < 0:
             print("A negative value(s) has been detected. Please input valid stats.")
 
         elif statPoints == 0:
