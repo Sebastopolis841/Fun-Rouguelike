@@ -70,13 +70,13 @@ def lootEquip(loot):
 
 def lootAsk(loot):
     equip = "N/A"
-    while equip != "n" and equip != "y":
+    while equip.lower() != "n" and equip.lower() != "y":
         equip = input("Would you like to equip this item? (y/n) ")
 
-        if equip == "y":
+        if equip.lower() == "y":
             lootEquip(loot)
 
-        elif equip == "n":
+        elif equip.lower() == "n":
             print("You have chosen not to equip this item. \n")
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")

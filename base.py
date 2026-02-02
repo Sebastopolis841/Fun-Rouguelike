@@ -92,12 +92,12 @@ def statsBase():
 
                 keepStats = input("Keep stats? (y/n): ")
 
-                if keepStats == "y":
+                if keepStats.lower() == "y":
                     goodStats = True
             
                     print("Your stats have been selected.")
 
-                elif keepStats == "n":
+                elif keepStats.lower() == "n":
                     print("Please select new stats: \n")
         
                 else:

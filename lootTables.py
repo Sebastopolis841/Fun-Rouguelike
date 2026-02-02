@@ -1,4 +1,5 @@
 import loot.chest as chest
+import loot.skeleton as skeleton
 
 class chestLoot:
     lootTable = [
@@ -35,3 +36,20 @@ class chestLoot:
     extraSpace = 7
 
     luckModifier = 0.7
+
+class skeletonLoot:
+    lootTable = [
+        skeleton.boneClub,
+        skeleton.skull,
+        skeleton.ribcage,
+        skeleton.ribDagger,
+        skeleton.bowAndArrow,
+        skeleton.gildedHelmet,
+        skeleton.cursedDagger,
+        skeleton.amuletOfNecromancy,
+        skeleton.staffOfTheUndead
+    ]
+
+    extraSpace = 3
+
+    luckModifier = 0.3
