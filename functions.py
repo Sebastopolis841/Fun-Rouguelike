@@ -57,3 +57,12 @@ def lootEquip(loot):
     current.dodge = (base.dodge + current.boots.dodge + current.amulet.dodge)
     current.piercing = current.weapon.piercing
     current.thorns = current.chestplate.thorns
+
+    print("\n Item successfully equipped. \n New stats: \n\n")
+
+    print("Strength: " + str(current.strength))
+    print("Incremental damage: " + str(current.incDamage))
+    print("Defence: " + str(current.defence))
+    print("Dodge: " + str(current.dodge))
+    print("Piercing: " + str(current.piercing))
+    print("Thorns: " + str(current.thorns))
