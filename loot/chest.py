@@ -119,6 +119,7 @@ class chainmailChestplate:
     name = "chainmail chestplate"
     type = chestplate
     defence = 4
+    thorns = 0
 
 class duelSteelDaggers:
     name = "duel steel daggers"

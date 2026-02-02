@@ -96,9 +96,6 @@ def statsBase():
                     goodStats = True
             
                     print("Your stats have been selected.")
-                
-                    dodge *= 5
-                    accuracy *=3
 
                 elif keepStats == "n":
                     print("Please select new stats: \n")

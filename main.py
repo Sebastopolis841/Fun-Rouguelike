@@ -12,7 +12,5 @@ accuracy = current.luck
 
 print()
 
-loot = functions.chest()
-
-functions.lootScan(loot)
-functions.lootAsk(loot)
+while True:
+    functions.getroom()

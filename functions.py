@@ -26,6 +26,7 @@ def lootScan(loot):
         print("Thorns = " + str(loot.thorns))
     elif loot.type == "amulet":
         print("Dodge = " + str(loot.dodge))
+        print("Incremental damage = " + str(loot.incDamage))
 
 def lootEquip(loot):
     global current
@@ -69,8 +70,8 @@ def lootEquip(loot):
 
 def lootAsk(loot):
     equip = "N/A"
-    while equip != "n" or equip != "y":
-        equip = input("Would you like to equip this item? (y/n)")
+    while equip != "n" and equip != "y":
+        equip = input("Would you like to equip this item? (y/n) ")
 
         if equip == "y":
             lootEquip(loot)
@@ -79,3 +80,30 @@ def lootAsk(loot):
             print("You have chosen not to equip this item. \n")
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")
+
+def chestRoom():
+    action = "N/A"
+    while action.lower() != "a" and action.lower() != "b":
+        action = input("You have reached a chest room. What would you like to do? \n A. Open the chest. \n B. Go to the next room. \n\n")
+        print()
+
+        if action.lower() == "a":
+            loot = chest()
+
+            lootScan(loot)
+            lootAsk(loot)
+
+            print()
+
+        elif action.lower() == "b":
+            break
+
+        else:
+            print("Please select either \'A\' or \'B\'.")
+
+
+def getroom():
+    roomSelect = random.randint(1, 100)
+
+    if roomSelect >= 1 and roomSelect <= 100:
+        chestRoom()
