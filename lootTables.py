@@ -19,6 +19,7 @@ class chestLoot:
             chest.bigRedBoots,
             chest.sneakers,
             chest.rustySword,
+            chest.healthCrystal,
             chest.chainmailHelmet,
             chest.chainmailPants,
             chest.chainmailChestplate,

@@ -5,6 +5,7 @@ luck = base.luck
 defence = base.defence
 dodge = base.dodge
 accuracy = base.accuracy
+health = base.health
 incDamage = 0
 piercing = False
 thorns = 0

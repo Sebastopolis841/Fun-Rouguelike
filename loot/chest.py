@@ -1,9 +1,12 @@
+import current
+
 weapon = "weapon"
 boots = "boots"
 helmet = "helmet"
 pants = "pants"
 chestplate = "chestplate"
 amulet = "amulet"
+health = "health"
 
 class rocks:
     name = "rock"
@@ -103,6 +106,11 @@ class rustySword:
     damage = 3
     incDamage = 0
     piercing = True
+
+class healthCrystal:
+    name = "health crystal"
+    type = health
+    boost = int(current.defence * 1.5)
 
 class chainmailHelmet:
     name = "chainmail helmet"

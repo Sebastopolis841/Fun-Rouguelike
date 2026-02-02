@@ -37,6 +37,8 @@ def lootScan(loot):
             print("Damage = " +str(loot.damage))
         except NameError:
             pass
+    elif loot.type == "health":
+        print("Increases health by " + str(loot.boost))
 
 def lootEquip(loot):
     global current
@@ -69,6 +71,8 @@ def lootEquip(loot):
             current.amulet.damage = loot.damage
         except NameError:
             current.amulet.damage = 0
+    elif loot.type == "health":
+        current.health += loot.boost
     else:
         print("There was an error loading your loot.")
     
@@ -87,6 +91,7 @@ def lootEquip(loot):
     print("Dodge: " + str(current.dodge))
     print("Piercing: " + str(current.piercing))
     print("Thorns: " + str(current.thorns))
+    print("Health: " + str(current.health))
 
 def lootAsk(loot):
     equip = "N/A"
