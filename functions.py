@@ -66,3 +66,16 @@ def lootEquip(loot):
     print("Dodge: " + str(current.dodge))
     print("Piercing: " + str(current.piercing))
     print("Thorns: " + str(current.thorns))
+
+def lootAsk(loot):
+    equip = "N/A"
+    while equip != "n" or equip != "y":
+        equip = input("Would you like to equip this item? (y/n)")
+
+        if equip == "y":
+            lootEquip(loot)
+
+        elif equip == "n":
+            print("You have chosen not to equip this item. \n")
+        else:
+            print("Please use \'y\' for yes and \'n\' for no. \n")
