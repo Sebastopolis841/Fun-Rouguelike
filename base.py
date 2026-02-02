@@ -21,25 +21,65 @@ def statsBase():
 
         print()
 
-        strengthAdd = int(input("You have 10 points left. How many points to put into strength: "))
-        strength += strengthAdd
-        statPoints -= strengthAdd
+        while goodStats == False:
+            try:
+                strengthAdd = int(input("You have 10 points left. How many points to put into strength: "))
+                strength += strengthAdd
+                statPoints -= strengthAdd
 
-        luckAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
-        luck += luckAdd
-        statPoints -= luckAdd
+                goodStats = True
+            except ValueError:
+                print("No integer selected. Try again. \n")
+            
+        goodStats = False    
 
-        defenceAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into defence: "))
-        defence += defenceAdd
-        statPoints -= defenceAdd
+        while goodStats == False:
+            try:
+                luckAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
+                luck += luckAdd
+                statPoints -= luckAdd
 
-        dodgeAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into dodge: "))
-        dodge += dodgeAdd
-        statPoints -= dodgeAdd
+                goodStats = True
+            except ValueError:
+                print("No integer selected. Try again. \n")
 
-        accuracyAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into accuracy: "))
-        accuracy += accuracyAdd
-        statPoints -= accuracyAdd
+        goodStats = False
+
+        while goodStats == False:
+            try:
+                defenceAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into defence: "))
+                defence += defenceAdd
+                statPoints -= defenceAdd
+
+                goodStats = True
+            except ValueError:
+                print("No integer selected. Try again. \n")
+            
+        goodStats = False
+
+        while goodStats == False:
+            try:
+                dodgeAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into dodge: "))
+                dodge += dodgeAdd
+                statPoints -= dodgeAdd
+                
+                goodStats = True
+            except ValueError:
+                print("No integer selected. Try again. \n")
+            
+        goodStats = False
+
+        while goodStats == False:
+            try:
+                accuracyAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into accuracy: "))
+                accuracy += accuracyAdd
+                statPoints -= accuracyAdd
+                
+                goodStats = True
+            except ValueError:
+                print("No integer selected. Try again. \n")
+            
+        goodStats = False
 
         if strengthAdd < 0 or luckAdd < 0 or defenceAdd < 0 or dodgeAdd < 0:
             print("A negative value(s) has been detected. Please input valid stats.")
