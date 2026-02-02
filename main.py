@@ -4,8 +4,6 @@ import functions
 import base
 import loot.current as current
 
-base.statsBase()
-
 strength = current.strength
 luck = current.luck
 defence = current.luck

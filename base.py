@@ -1,4 +1,5 @@
 def statsBase():
+    goodStats = False
     while goodStats == False:
         global strength
         global luck
@@ -6,7 +7,6 @@ def statsBase():
         global dodge
         global accuracy
 
-        goodStats = False
         keepStats = "N/A"
         statPoints = 10
         strength = 1
@@ -69,3 +69,5 @@ def statsBase():
 
         else:
             print("Your stat points have been improperly distributed. Please redistribute stats.")
+
+statsBase()
