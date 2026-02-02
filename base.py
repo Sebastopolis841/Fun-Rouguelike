@@ -16,7 +16,7 @@ def statsBase():
         accuracy = 1
 
         print("You have 15 stat points to spend.")
-        print("These can be put into 4 attributes: Strength, Luck, Defence, Dodge and Accuracy")
+        print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy")
         print("Each stat starts with one stat point, so you have 10 left to use.")
 
         print()
