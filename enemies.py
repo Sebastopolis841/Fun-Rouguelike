@@ -22,3 +22,4 @@ class stoneGolem:
     accuracy = 12
     dodge = 0
     defence = 5
+    incDamaged = 0

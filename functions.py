@@ -41,15 +41,15 @@ def lootScan(loot):
     elif loot.type == "amulet":
         try:
             print("Dodge = " + str(loot.dodge))
-        except NameError:
+        except AttributeError:
             pass
         try:
             print("Incremental damage = " + str(loot.incDamage))
-        except NameError:
+        except AttributeError:
             pass
         try:
             print("Damage = " +str(loot.damage))
-        except NameError:
+        except AttributeError:
             pass
     elif loot.type == "health":
         print("Increases health by " + str(healthBoost(loot)))
@@ -75,15 +75,15 @@ def lootEquip(loot):
     elif loot.type == "amulet":
         try:
             current.amulet.dodge = loot.dodge
-        except NameError:
+        except AttributeError:
             current.amulet.dodge = 0
         try:
             current.amulet.incDamage = loot.incDamage
-        except NameError:
+        except AttributeError:
             current.amulet.incDamage = 0
         try:
             current.amulet.damage = loot.damage
-        except NameError:
+        except AttributeError:
             current.amulet.damage = 0
     elif loot.type == "health":
         boost = healthBoost(loot)
@@ -152,6 +152,8 @@ def playerAttack():
         damage = (current.strength - current.enemy.defence)
 
     current.enemy.health -= damage
+
+    print("You hit the enemy for " + damage + " damage!")
 
     if current.enemy.incDamaged == 0:
         current.enemy.incDamaged = current.incDamage
