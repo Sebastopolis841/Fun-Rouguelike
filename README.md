@@ -8,7 +8,7 @@ This game is already playable, but I am still working on making it better. There
 
 ## Download
 
-Download this game either by clicking the link below or downloading the zip file above, and then clicking "download raw"
+Download the latest tested versio of this game either by clicking the link below or downloading the zip file above, and then clicking "download raw"
 
 To play, you have to run main.py.
 

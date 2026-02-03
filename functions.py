@@ -17,6 +17,9 @@ def chest():
 def skeleton():
     return loot(lootTables.skeletonLoot.lootTable, lootTables.skeletonLoot.extraSpace, current.luck, lootTables.skeletonLoot.luckModifier)
 
+def stoneGolem():
+    return loot(lootTables.stoneGolemLoot.lootTable, lootTables.stoneGolemLoot.extraSpace, current.luck, lootTables.stoneGolemLoot.luckModifier)
+
 def healthBoost(loot):
     return loot.boost * current.defence
 
@@ -223,6 +226,22 @@ def skeletonRoom():
     else:
         print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
 
+def stoneGolemRoom():
+    global current
+
+    current.enemy = enemies.stoneGolem
+
+    print("You entered a room with a stone golem in it.")
+
+    result = encounter()
+
+    if result == "victory":
+        print("You got some loot! \n")
+        loot = stoneGolem()
+        lootRetrieve(loot)
+    else:
+        print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
+
 def chestRoom():
     action = "N/A"
     while action.lower() != "a" and action.lower() != "b":
@@ -245,7 +264,9 @@ def chestRoom():
 def getroom():
     roomSelect = random.randint(1, 100)
 
-    if roomSelect >= 1 and roomSelect <= 50:
+    if roomSelect >= 1 and roomSelect <= 34:
         chestRoom()
-    elif roomSelect >=51 and roomSelect <= 100:
+    elif roomSelect >=35 and roomSelect <= 68:
         skeletonRoom()
+    elif roomSelect >= 69 and roomSelect <= 100:
+        stoneGolemRoom()

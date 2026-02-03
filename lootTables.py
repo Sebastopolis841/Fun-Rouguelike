@@ -1,5 +1,6 @@
 import loot.chest as chest
 import loot.skeleton as skeleton
+import loot.stoneGolem as stoneGolem
 
 class chestLoot:
     lootTable = [
@@ -54,3 +55,20 @@ class skeletonLoot:
     extraSpace = 3
 
     luckModifier = 0.3
+
+class stoneGolemLoot:
+    lootTable = [
+        chest.rocks,
+        stoneGolem.midStone,
+        stoneGolem.stoneBlade,
+        stoneGolem.boulder,
+        stoneGolem.eyeOfTheGolem,
+        stoneGolem.stoneWroughtHelmet,
+        stoneGolem.stoneWroughtBoots,
+        stoneGolem.stoneWroughtPants,
+        stoneGolem.stoneWroughtChestplate
+        ]
+    
+    extraSpace = 2
+
+    luckModifier = 0.2
