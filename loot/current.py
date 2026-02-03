@@ -9,6 +9,7 @@ health = base.health
 incDamage = 0
 piercing = False
 thorns = 0
+incDamaged = 0
 
 
 class weapon:
@@ -37,7 +38,9 @@ class amulet:
 
 class enemy:
     maxHealth = 0
+    health = 0
     damage = 0
     incDamage = 0
     accuracy = 0
     dodge = 0
+    incDamaged = 0

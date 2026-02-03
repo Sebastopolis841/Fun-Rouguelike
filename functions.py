@@ -2,6 +2,7 @@ import random
 import lootTables
 import loot.current as current
 import base
+import enemies
 import sys
 
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
@@ -9,6 +10,9 @@ def loot(lootTable, lootExtraSpace, luck, luckModifier):
 
 def chest():
     return loot(lootTables.chestLoot.lootTable, lootTables.chestLoot.extraSpace, current.luck, lootTables.chestLoot.luckModifier)
+
+def skeleton():
+    return loot(lootTables.skeletonLoot.lootTable, lootTables.skeletonLoot.extraSpace, current.luck, lootTables.skeletonLoot.luckModifier)
 
 def lootScan(loot):
     print(loot.name)
@@ -109,29 +113,107 @@ def lootAsk(loot):
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")
 
-def enemyAttack(enemy):
+def lootRetrieve(loot):
+    lootScan(loot)
+    lootAsk(loot)
+
+def enemyAttack():
     global current
 
-    damage = enemy.damage - current.defence
+    damage = current.enemy.damage - current.defence
     current.health -= damage
+
+    if current.incDamaged == 0:
+        current.incDamaged = current.enemy.incDamage
+    
+    print("You got hit for " + damage + "damage \n New health: " + str(current.health))
+
     if current.health <= 0:
         return "loss"
     else:
         return "N/A"
 
-def playerAttack(enemy):
+def playerAttack():
     global current
 
-    if current.weapon.piercing == True:
-        damage = (current.strength - (enemy.defence / 2))
+    if current.piercing == True:
+        damage = (current.strength - (current.enemy.defence / 2))
     else:
-        damage = (current.strength - enemy.defence)
-    
-    if enemy.health <= 0:
+        damage = (current.strength - current.enemy.defence)
+
+    current.enemy.health -= damage
+
+    if current.enemy.incDamaged == 0:
+        current.enemy.incDamaged = current.incDamage
+
+    if current.enemy.health <= 0:
         return "victory"
     else:
         return "N/A"
+
+def incDamage(target):
+    target.health -= target.incDamaged
+
+    target.incDamaged = int(target.incDamaged / 2)
+
+def rest():
+    global current
+
+    current.health += int(base.health * 0.15)
+    if current.health > base.health:
+        current.health = base.health
     
+    print("Successfully healed. \n New health: " + str(current.health))
+
+def flee():
+    chance = random.randint(1,10)
+    if chance <= current.dodge:
+        return "escape"
+
+def encounter():
+    global current
+    result = "N/A"
+
+    while True:
+        action = "N/A"
+
+        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee")
+
+        if action.lower() == "a":
+            result = playerAttack()
+            if result == "victory":
+                print("You won the encounter!")
+                return "victory"
+        elif action.lower() == "b":
+            rest()
+        elif action.lower() == "c":
+            result = flee()
+            if result == "escape":
+                return "escape"
+        else:
+            print("Please select either \'A\', \'B\', or \'C\'")
+        
+        result = enemyAttack()
+        if result == "loss":
+            sys.exit("You lost. );")
+        incDamage(current.enemy)
+        incDamage(current)
+
+def skeletonRoom():
+    global current
+    
+    current.enemy = enemies.skeleton
+
+    print("You entered a room with a skeleton in it.")
+
+    result = encounter()
+
+    if result == "victory":
+        print("You got some loot! \n")
+        loot = skeleton()
+        lootRetrieve(loot)
+    else:
+        print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
 
 def chestRoom():
     action = "N/A"
@@ -141,9 +223,7 @@ def chestRoom():
 
         if action.lower() == "a":
             loot = chest()
-
-            lootScan(loot)
-            lootAsk(loot)
+            lootRetrieve(loot)
 
             print()
 
@@ -157,5 +237,7 @@ def chestRoom():
 def getroom():
     roomSelect = random.randint(1, 100)
 
-    if roomSelect >= 1 and roomSelect <= 100:
+    if roomSelect >= 1 and roomSelect <= 50:
         chestRoom()
+    elif roomSelect >=51 and roomSelect <= 100:
+        skeletonRoom()
