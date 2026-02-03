@@ -6,13 +6,19 @@ import enemies
 import sys
 
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
-    return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
+    try:
+        return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
+    except IndexError:
+        return lootTable[-1]
 
 def chest():
     return loot(lootTables.chestLoot.lootTable, lootTables.chestLoot.extraSpace, current.luck, lootTables.chestLoot.luckModifier)
 
 def skeleton():
     return loot(lootTables.skeletonLoot.lootTable, lootTables.skeletonLoot.extraSpace, current.luck, lootTables.skeletonLoot.luckModifier)
+
+def healthBoost(loot):
+    return loot.boost * current.defence
 
 def lootScan(loot):
     print(loot.name)
@@ -43,7 +49,7 @@ def lootScan(loot):
         except NameError:
             pass
     elif loot.type == "health":
-        print("Increases health by " + str(loot.boost))
+        print("Increases health by " + str(healthBoost(loot)))
 
 def lootEquip(loot):
     global current
@@ -77,8 +83,9 @@ def lootEquip(loot):
         except NameError:
             current.amulet.damage = 0
     elif loot.type == "health":
-        current.health += loot.boost
-        base.health += loot.boost
+        boost = healthBoost(loot)
+        current.health += boost
+        base.health += boost
     else:
         print("There was an error loading your loot.")
     
@@ -126,7 +133,7 @@ def enemyAttack():
     if current.incDamaged == 0:
         current.incDamaged = current.enemy.incDamage
     
-    print("You got hit for " + damage + "damage \n New health: " + str(current.health))
+    print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
 
     if current.health <= 0:
         return "loss"
@@ -177,7 +184,7 @@ def encounter():
     while True:
         action = "N/A"
 
-        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee")
+        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee. \n\n")
 
         if action.lower() == "a":
             result = playerAttack()
@@ -195,7 +202,8 @@ def encounter():
         
         result = enemyAttack()
         if result == "loss":
-            sys.exit("You lost. );")
+            print("You lost. ):")
+            sys.exit()
         incDamage(current.enemy)
         incDamage(current)
 

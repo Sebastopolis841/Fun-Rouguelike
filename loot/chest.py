@@ -1,5 +1,3 @@
-import current
-
 weapon = "weapon"
 boots = "boots"
 helmet = "helmet"
@@ -110,7 +108,7 @@ class rustySword:
 class healthCrystal:
     name = "health crystal"
     type = health
-    boost = int(current.defence * 1.5)
+    boost = 1.5
 
 class chainmailHelmet:
     name = "chainmail helmet"

@@ -107,5 +107,6 @@ def statsBase():
         else:
             print("Your stat points have been improperly distributed. Please redistribute stats.")
 
-health = 10 + defence
 statsBase()
+
+health = 10 + defence
