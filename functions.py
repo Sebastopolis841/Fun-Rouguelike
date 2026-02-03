@@ -153,7 +153,7 @@ def playerAttack():
 
     current.enemy.health -= damage
 
-    print("You hit the enemy for " + damage + " damage!")
+    print("You hit the enemy for " + str(damage) + " damage!")
 
     if current.enemy.incDamaged == 0:
         current.enemy.incDamaged = current.incDamage
