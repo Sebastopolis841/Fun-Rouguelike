@@ -12,4 +12,4 @@ Download the latest tested versio of this game either by clicking the link below
 
 To play, you have to run main.py.
 
-[Download here](battleGame.zip)
+[Download here](https://github.com/Sebastopolis841/Fun-Rouguelike/raw/refs/heads/main/battleGame.zip)
