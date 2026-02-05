@@ -177,6 +177,11 @@ def rest():
     
     print("Successfully healed. \n New health: " + str(current.health))
 
+def regen():
+    global base
+
+    base.health += int(current.defence/2)
+
 def flee():
     chance = random.randint(1,10)
     if chance <= current.dodge:
@@ -195,12 +200,14 @@ def encounter():
             result = playerAttack()
             if result == "victory":
                 print("You won the encounter!")
+                regen()
                 return "victory"
         elif action.lower() == "b":
             rest()
         elif action.lower() == "c":
             result = flee()
             if result == "escape":
+                regen()
                 return "escape"
         else:
             print("Please select either \'A\', \'B\', or \'C\'")
@@ -209,6 +216,7 @@ def encounter():
         if result == "loss":
             print("You lost. ):")
             sys.exit()
+
         incDamage(current.enemy)
         incDamage(current)
 
