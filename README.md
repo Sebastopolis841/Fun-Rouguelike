@@ -4,7 +4,7 @@ This is a text-based rouguelike game I am making in python, complete with RNG, l
 
 ## Status
 
-This game is already playable, but I am still working on making it better. There is currently a skeleton room, a chest room and a stone golem room in the game.
+This game is already playable, but I am still working on making it better. There is currently a skeleton room, a chest room, a library and a stone golem room in the game.
 
 ## Download
 

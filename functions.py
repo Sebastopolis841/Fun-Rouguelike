@@ -134,6 +134,10 @@ def enemyAttack():
     global current
 
     damage = current.enemy.damage - current.defence
+
+    if damage <= 0:
+        damage = 1
+
     current.health -= damage
 
     if current.incDamaged == 0:
@@ -153,6 +157,9 @@ def playerAttack():
         damage = (current.strength - (current.enemy.defence / 2))
     else:
         damage = (current.strength - current.enemy.defence)
+    
+    if damage <= 0:
+        damage = 1
 
     current.enemy.health -= damage
 
@@ -168,6 +175,8 @@ def playerAttack():
 
 def incDamage(target):
     target.health -= target.incDamaged
+
+    print("The enemy took " + str(target.incDamaged) + " inmcremental damage.")
 
     target.incDamaged = int(target.incDamaged / 2)
 
