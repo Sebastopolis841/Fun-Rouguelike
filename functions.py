@@ -24,7 +24,7 @@ def library():
     return loot(lootTables.libraryLoot.lootTable, lootTables.libraryLoot.extraSpace, current.luck, lootTables.libraryLoot.luckModifier)
 
 def healthBoost(loot):
-    return loot.boost * current.defence
+    return int(loot.boost * current.defence)
 
 def lootScan(loot):
     print(loot.name)
@@ -154,9 +154,9 @@ def playerAttack():
     global current
 
     if current.piercing == True:
-        damage = (current.strength - (current.enemy.defence / 2))
+        damage = int(current.strength - (current.enemy.defence / 2))
     else:
-        damage = (current.strength - current.enemy.defence)
+        damage = int(current.strength - current.enemy.defence)
     
     if damage <= 0:
         damage = 1
@@ -236,7 +236,7 @@ def encounter():
             print("You lost. ):")
             sys.exit()
 
-        enemyIncDamage(current.enemy)
+        enemyIncDamage()
         playerIncDamage()
 
 def skeletonRoom():
