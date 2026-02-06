@@ -280,7 +280,7 @@ def libraryRoom():
         print()
 
         if action.lower() == "a":
-            loot = chest()
+            loot = library()
             lootRetrieve(loot)
 
             print()

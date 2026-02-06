@@ -17,9 +17,9 @@ def statsBase():
         print()
         print()
 
-        print("You have 20 stat points to spend.")
+        print("You have 14 stat points to spend.")
         print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy \n")
-        print("Each stat except for luck starts with one stat point, so you have 15 left to use.")
+        print("Each stat except for luck starts with one stat point, so you have 10 left to use.")
 
         print()
 
