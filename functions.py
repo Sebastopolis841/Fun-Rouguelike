@@ -173,12 +173,19 @@ def playerAttack():
     else:
         return "N/A"
 
-def incDamage(target):
-    target.health -= target.incDamaged
+def enemyIncDamage():
+    current.enemy.health -= current.enemy.incDamaged
 
-    print("The enemy took " + str(target.incDamaged) + " inmcremental damage.")
+    print("The enemy took " + str(current.enemy.incDamaged) + " inmcremental damage.")
 
-    target.incDamaged = int(target.incDamaged / 2)
+    current.enemy.incDamaged = int(current.enemy.incDamaged / 2)
+
+def playerIncDamage():
+    current.health -= current.incDamaged
+
+    print("You took " + str(current.incDamaged) + " inmcremental damage.")
+
+    current.incDamaged = int(current.incDamaged / 2)
 
 def rest():
     global current
@@ -229,8 +236,8 @@ def encounter():
             print("You lost. ):")
             sys.exit()
 
-        incDamage(current.enemy)
-        incDamage(current)
+        enemyIncDamage(current.enemy)
+        playerIncDamage()
 
 def skeletonRoom():
     global current
