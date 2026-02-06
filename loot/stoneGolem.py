@@ -20,6 +20,11 @@ class stoneBlade:
     incDamage = 0
     piercing = True
 
+class heartStone:
+    name = "heart stone"
+    type = health
+    boost = 2
+
 class boulder:
     name = "boulder"
     type = weapon

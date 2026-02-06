@@ -20,6 +20,9 @@ def skeleton():
 def stoneGolem():
     return loot(lootTables.stoneGolemLoot.lootTable, lootTables.stoneGolemLoot.extraSpace, current.luck, lootTables.stoneGolemLoot.luckModifier)
 
+def library():
+    return loot(lootTables.libraryLoot.lootTable, lootTables.libraryLoot.extraSpace, current.luck, lootTables.libraryLoot.luckModifier)
+
 def healthBoost(loot):
     return loot.boost * current.defence
 
@@ -270,13 +273,33 @@ def chestRoom():
         else:
             print("Please select either \'A\' or \'B\'.")
 
+def libraryRoom():
+    action = "N/A"
+    while action.lower() != "a" and action.lower() != "b":
+        action = input("You have reached a library. What would you like to do? \n A. Peruse the books \n B. Go to the next room. \n\n")
+        print()
+
+        if action.lower() == "a":
+            loot = chest()
+            lootRetrieve(loot)
+
+            print()
+
+        elif action.lower() == "b":
+            break
+
+        else:
+            print("Please select either \'A\' or \'B\'.")
+
 
 def getroom():
     roomSelect = random.randint(1, 100)
 
-    if roomSelect >= 1 and roomSelect <= 34:
+    if roomSelect >= 1 and roomSelect <= 25:
         chestRoom()
-    elif roomSelect >=35 and roomSelect <= 68:
+    elif roomSelect >=26 and roomSelect <= 20:
         skeletonRoom()
-    elif roomSelect >= 69 and roomSelect <= 100:
+    elif roomSelect >= 51 and roomSelect <= 75:
         stoneGolemRoom()
+    elif roomSelect >= 76 and roomSelect <= 100:
+        libraryRoom()

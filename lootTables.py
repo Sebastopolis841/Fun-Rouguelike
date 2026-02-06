@@ -1,6 +1,7 @@
 import loot.chest as chest
 import loot.skeleton as skeleton
 import loot.stoneGolem as stoneGolem
+import loot.library as library
 
 class chestLoot:
     lootTable = [
@@ -72,3 +73,21 @@ class stoneGolemLoot:
     extraSpace = 2
 
     luckModifier = 0.2
+
+class libraryLoot:
+    lootTable = [
+        library.windTome,
+        library.fisticuffsManual,
+        library.fireTome,
+        library.iceTome,
+        library.rejuvinationManual,
+        library.magicMissileTome,
+        library.necromancyTome,
+        library.healingTome,
+        library.tomeOfTheShiftingTide,
+        library.tomeOfTheDeepestUnderworld
+    ]
+
+    extraSpace = 3
+
+    luckModifier  = 0.3
