@@ -19,28 +19,33 @@ def statsBase():
 
         print("You have 14 stat points to spend.")
         print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy \n")
-        print("Each stat except for luck starts with one stat point, so you have 10 left to use.")
+        print("Each stat except for luck must be given 1 stat point, so you have 15 left to use.")
 
         print()
 
         while goodStats == False:
             try:
-                strengthAdd = int(input("You have 10 points left. How many points to put into strength: "))
-                strength += strengthAdd
-                statPoints -= strengthAdd
+                strength = int(input("You have 10 points left. How many points to put into strength: "))
+                if strength >= 1 and strength <= 11:
+                    statPoints -= strength
 
-                goodStats = True
+                    goodStats = True
+                else:
+                    print("Please select a number between 1 and 11 inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
-        goodStats = False    
+        goodStats = False
 
         while goodStats == False:
             try:
                 luck = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
-                statPoints -= luck
+                if luck >= 0 and luck <= 11:
+                    statPoints -= luck
 
-                goodStats = True
+                    goodStats = True
+                else:
+                    print("Please select a number between 0 and 11 inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
 
@@ -48,11 +53,13 @@ def statsBase():
 
         while goodStats == False:
             try:
-                defenceAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into defence: "))
-                defence += defenceAdd
-                statPoints -= defenceAdd
+                defence = int(input("You have " + str(statPoints) + " points left. How many points to put into defence: "))
+                if defence >= 1 and defence <= 11:
+                    statPoints -= defence
 
-                goodStats = True
+                    goodStats = True
+                else:
+                    print("Please select a number between 1 and 11 inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
@@ -60,9 +67,22 @@ def statsBase():
 
         while goodStats == False:
             try:
-                dodgeAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into dodge: "))
-                dodge += dodgeAdd
-                statPoints -= dodgeAdd
+                dodge = int(input("You have " + str(statPoints) + " points left. How many points to put into dodge: "))
+                if dodge >= 1 and dodge <= 11:
+                    statPoints -= dodge
+                
+                    goodStats = True
+                else:
+                    print("Please select a number between 1 and 11 inclusive. \n")
+            except ValueError:
+                print("No integer selected. Try again. \n")
+            
+        goodStats = False
+
+        while goodStats == False:
+            try:
+                accuracy = int(input("You have " + str(statPoints) + " points left. How many points to put into accuracy: "))
+                statPoints -= accuracy
                 
                 goodStats = True
             except ValueError:
@@ -70,19 +90,7 @@ def statsBase():
             
         goodStats = False
 
-        while goodStats == False:
-            try:
-                accuracyAdd = int(input("You have " + str(statPoints) + " points left. How many points to put into accuracy: "))
-                accuracy += accuracyAdd
-                statPoints -= accuracyAdd
-                
-                goodStats = True
-            except ValueError:
-                print("No integer selected. Try again. \n")
-            
-        goodStats = False
-
-        if strengthAdd < 0 or luck < 0 or defenceAdd < 0 or dodgeAdd < 0:
+        if strength < 0 or luck < 0 or defence < 0 or dodge < 0:
             print("A negative value(s) has been detected. Please input valid stats.")
 
         elif statPoints == 0:
