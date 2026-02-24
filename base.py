@@ -119,3 +119,4 @@ statsBase()
 
 health = 10 + defence
 room = 1
+difficulty = 1
