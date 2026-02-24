@@ -289,11 +289,13 @@ def encounter():
                 regen()
                 return "escape"
         elif action.lower() == "c -h":
-            print("Flee: Makes an attempt to escape the encounter based off of dodge.")
+            print("\n Flee: Makes an attempt to escape the encounter based off of dodge. \n")
         elif action.lower() == "d":
             help = False
             result = "counter"
             counter = True
+        elif action.lower() == "d -h":
+            print("\n Counter: Increases dodge for a turn. If you dodge successfully, then you get to counterattack. \n")
         else:
             print("Please select either \'A\', \'B\', or \'C\'")
         
