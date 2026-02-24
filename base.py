@@ -8,7 +8,7 @@ def statsBase():
         global accuracy
 
         keepStats = "N/A"
-        statPoints = 10
+        statPoints = 14
         strength = 1
         defence = 1
         dodge = 1
@@ -25,7 +25,7 @@ def statsBase():
 
         while goodStats == False:
             try:
-                strength = int(input("You have 10 points left. How many points to put into strength: "))
+                strength = int(input("You have " + str(statPoints) + " points left. How many points to put into strength: "))
                 if strength >= 1 and strength <= 11:
                     statPoints -= strength
 
