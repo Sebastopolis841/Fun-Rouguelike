@@ -363,11 +363,32 @@ def getroom():
     
     roomSelect = random.randint(1, 100)
 
-    if roomSelect >= 1 and roomSelect <= 25:
-        chestRoom()
-    elif roomSelect >=26 and roomSelect <= 50:
-        skeletonRoom()
-    elif roomSelect >= 51 and roomSelect <= 75:
-        stoneGolemRoom()
-    elif roomSelect >= 76 and roomSelect <= 100:
-        libraryRoom()
+    if current.room < 15:
+        if roomSelect >= 1 and roomSelect <= 40:
+            chestRoom()
+        elif roomSelect >=41 and roomSelect <= 80:
+            skeletonRoom()
+        elif roomSelect >= 81 and roomSelect <= 90:
+            stoneGolemRoom()
+        elif roomSelect >= 91 and roomSelect <= 100:
+            libraryRoom()
+
+    elif current.room < 30:
+        if roomSelect >= 1 and roomSelect <= 25:
+            chestRoom()
+        elif roomSelect >=26 and roomSelect <= 50:
+            skeletonRoom()
+        elif roomSelect >= 51 and roomSelect <= 75:
+            stoneGolemRoom()
+        elif roomSelect >= 76 and roomSelect <= 100:
+            libraryRoom()
+
+    else:
+        if roomSelect >= 1 and roomSelect <= 20:
+            chestRoom()
+        elif roomSelect >=21 and roomSelect <= 40:
+            skeletonRoom()
+        elif roomSelect >= 41 and roomSelect <= 70:
+            stoneGolemRoom()
+        elif roomSelect >= 71 and roomSelect <= 100:
+            libraryRoom()
