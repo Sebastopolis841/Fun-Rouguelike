@@ -118,3 +118,4 @@ def statsBase():
 statsBase()
 
 health = 10 + defence
+room = 1

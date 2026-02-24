@@ -346,6 +346,9 @@ def libraryRoom():
 
 
 def getroom():
+    print("You are on room " + current.room + ".")
+    current.room += 1
+    
     roomSelect = random.randint(1, 100)
 
     if roomSelect >= 1 and roomSelect <= 25:
