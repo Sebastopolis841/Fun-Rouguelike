@@ -250,7 +250,7 @@ def encounter():
     while True:
         action = "N/A"
 
-        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee. \n\n")
+        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee. \n D. Counter \n\n")
 
         if action.lower() == "a":
             result = playerAttack()
@@ -265,13 +265,25 @@ def encounter():
             if result == "escape":
                 regen()
                 return "escape"
+        elif action.lower() == "d":
+            result = "counter"
         else:
             print("Please select either \'A\', \'B\', or \'C\'")
         
-        result = enemyAttack()
-        if result == "loss":
-            print("You lost. ):")
-            sys.exit()
+        if result == "counter":
+            tempDodge = current.dodge
+            current.dodge = int(current.dodge * 1.5)
+
+            result = enemyAttack()
+            if result == "loss":
+                print("You lost. ):")
+                sys.exit()
+            current.dodge = tempDodge
+        else:
+            result = enemyAttack()
+            if result == "loss":
+                print("You lost. ):")
+                sys.exit()
 
         enemyIncDamage()
         playerIncDamage()
