@@ -130,6 +130,20 @@ def lootRetrieve(loot):
     lootScan(loot)
     lootAsk(loot)
 
+def randomizer(stat):
+    randomizerLow = stat / 2
+    randomizerHigh = stat * 2
+    
+    tempstat = random.randint(randomizerLow, randomizerHigh)
+
+    return tempstat
+
+def dodge(accuracy,dodge):
+    if randomizer(dodge) > randomizer(accuracy):
+        return True
+    else:
+        return False
+
 def enemyAttack():
     global current
 
@@ -138,17 +152,21 @@ def enemyAttack():
     if damage <= 0:
         damage = 1
 
-    current.health -= damage
-
-    if current.incDamaged == 0:
-        current.incDamaged = current.enemy.incDamage
-    
-    print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
-
-    if current.health <= 0:
-        return "loss"
-    else:
+    if dodge(current.enemy.accuracy,current.dodge) == True:
+        print("You dodged the enemy's attack and took 0 damage!")
         return "N/A"
+    else:
+        current.health -= damage
+
+        if current.incDamaged == 0:
+            current.incDamaged = current.enemy.incDamage
+    
+        print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
+
+        if current.health <= 0:
+            return "loss"
+        else:
+            return "N/A"
 
 def playerAttack():
     global current
@@ -161,17 +179,21 @@ def playerAttack():
     if damage <= 0:
         damage = 1
 
-    current.enemy.health -= damage
-
-    print("You hit the enemy for " + str(damage) + " damage!")
-
-    if current.enemy.incDamaged == 0:
-        current.enemy.incDamaged = current.incDamage
-
-    if current.enemy.health <= 0:
-        return "victory"
-    else:
+    if dodge(current.accuracy,current.enemy.dodge) == True:
+        print("The enemy dodged and took 0 damage")
         return "N/A"
+    else:
+        current.enemy.health -= damage
+
+        print("You hit the enemy for " + str(damage) + " damage!")
+
+        if current.enemy.incDamaged == 0:
+            current.enemy.incDamaged = current.incDamage
+
+        if current.enemy.health <= 0:
+            return "victory"
+        else:
+            return "N/A"
 
 def enemyIncDamage():
     current.enemy.health -= current.enemy.incDamaged
@@ -180,12 +202,22 @@ def enemyIncDamage():
 
     current.enemy.incDamaged = int(current.enemy.incDamaged / 2)
 
+    if current.enemy.health <= 0:
+        return "victory"
+    else:
+        return "N/A"
+
 def playerIncDamage():
     current.health -= current.incDamaged
 
     print("You took " + str(current.incDamaged) + " inmcremental damage.")
 
     current.incDamaged = int(current.incDamaged / 2)
+
+    if current.health <= 0:
+        return "loss"
+    else:
+        return "N/A"
 
 def rest():
     global current
