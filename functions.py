@@ -134,7 +134,7 @@ def randomizer(stat):
     randomizerLow = stat / 2
     randomizerHigh = stat * 2
     
-    tempstat = random.randint(randomizerLow, randomizerHigh)
+    tempstat = random.randint(int(randomizerLow), randomizerHigh)
 
     return tempstat
 

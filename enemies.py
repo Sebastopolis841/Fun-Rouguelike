@@ -7,8 +7,8 @@ class skeleton:
     health = 10
     damage = 6
     incDamage = 0
-    accuracy = 14
-    dodge = 2
+    accuracy = 8
+    dodge = 4
     incDamaged = 0
     defence = 1
 
@@ -19,7 +19,7 @@ class stoneGolem:
     health = 15
     damage = 8
     incDamage = 0
-    accuracy = 12
+    accuracy = 7
     dodge = 0
     defence = 5
     incDamaged = 0
