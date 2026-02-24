@@ -30,68 +30,68 @@ def lootScan(loot):
     print(loot.name)
     print(loot.type)
     if loot.type == "weapon":
-        print("Damage = " + str(loot.damage * current.difficulty))
-        print("Incremental damage = " + str(loot.incDamage * current.difficulty))
-        print("Piercing = " + str(loot.piercing * current.difficulty))
+        print("Damage = " + str(int(loot.damage * current.difficulty)))
+        print("Incremental damage = " + str(int(loot.incDamage * current.difficulty)))
+        print("Piercing = " + str(int(loot.piercing * current.difficulty)))
     elif loot.type == "boots":
-        print("Defence = " + str(loot.defence * current.difficulty))
-        print("Dodge = " + str(loot.dodge * current.difficulty))
+        print("Defence = " + str(int(loot.defence * current.difficulty)))
+        print("Dodge = " + str(int(loot.dodge * current.difficulty)))
     elif loot.type == "pants" or loot.type == "helmet":
-        print("Defence = " + str(loot.defence * current.difficulty))
+        print("Defence = " + str(int(loot.defence * current.difficulty)))
     elif loot.type == "chestplate":
-        print("Defence = " + str(loot.defence * current.difficulty))
-        print("Thorns = " + str(loot.thorns * current.difficulty))
+        print("Defence = " + str(int(loot.defence * current.difficulty)))
+        print("Thorns = " + str(int(loot.thorns * current.difficulty)))
     elif loot.type == "amulet":
         try:
-            print("Dodge = " + str(loot.dodge * current.difficulty))
+            print("Dodge = " + str(int(loot.dodge * current.difficulty)))
         except AttributeError:
             pass
         try:
-            print("Incremental damage = " + str(loot.incDamage * current.difficulty))
+            print("Incremental damage = " + str(int(loot.incDamage * current.difficulty)))
         except AttributeError:
             pass
         try:
-            print("Damage = " +str(loot.damage * current.difficulty))
+            print("Damage = " +str(int(loot.damage * current.difficulty)))
         except AttributeError:
             pass
     elif loot.type == "health":
-        print("Increases health by " + str(healthBoost(loot) * current.difficulty))
+        print("Increases health by " + str(int(healthBoost(loot) * current.difficulty)))
 
 def lootEquip(loot):
     global current
     global base
 
     if loot.type == "weapon":
-        current.weapon.damage = loot.damage * current.difficulty
-        current.weapon.incDamage = loot.damage * current.difficulty
-        current.weapon.piercing = loot.piercing * current.difficulty
+        current.weapon.damage = int(loot.damage * current.difficulty)
+        current.weapon.incDamage = int(loot.damage * current.difficulty)
+        current.weapon.piercing = int(loot.piercing * current.difficulty)
     elif loot.type == "boots":
-        current.boots.defence = loot.defence * current.difficulty
-        current.boots.dodge = loot.dodge * current.difficulty
+        current.boots.defence = int(loot.defence * current.difficulty)
+        current.boots.dodge = int(loot.dodge * current.difficulty)
     elif loot.type == "pants":
-        current.pants.defence = loot.defence * current.difficulty
+        current.pants.defence = int(loot.defence * current.difficulty)
     elif loot.type == "helmet":
-        current.helmet.defence = loot.defence * current.difficulty
+        current.helmet.defence = int(loot.defence * current.difficulty)
     elif loot.type == "chestplate":
-        current.chestplate.defence = loot.defence * current.difficulty
-        current.chestplate.thorns = loot.thorns * current.difficulty
+        current.chestplate.defence = int(loot.defence * current.difficulty)
+        current.chestplate.thorns = int(loot.thorns * current.difficulty)
     elif loot.type == "amulet":
         try:
-            current.amulet.dodge = loot.dodge * current.difficulty
+            current.amulet.dodge = int(loot.dodge * current.difficulty)
         except AttributeError:
             current.amulet.dodge = 0
         try:
-            current.amulet.incDamage = loot.incDamage * current.difficulty
+            current.amulet.incDamage = int(loot.incDamage * current.difficulty)
         except AttributeError:
             current.amulet.incDamage = 0
         try:
-            current.amulet.damage = loot.damage * current.difficulty
+            current.amulet.damage = int(loot.damage * current.difficulty)
         except AttributeError:
             current.amulet.damage = 0
     elif loot.type == "health":
-        boost = healthBoost(loot) * current.difficulty
-        current.health += boost * current.difficulty
-        base.health += boost * current.difficulty
+        boost = int(healthBoost(loot) * current.difficulty)
+        current.health += boost
+        base.health += boost
     else:
         print("There was an error loading your loot.")
     
@@ -147,7 +147,7 @@ def dodge(accuracy,dodge):
 def enemyAttack():
     global current
 
-    damage = current.enemy.damage - current.defence * current.difficulty * current.difficulty
+    damage = int(current.enemy.damage - current.defence)
 
     if damage <= 0:
         damage = 1
@@ -159,7 +159,7 @@ def enemyAttack():
         current.health -= damage
 
         if current.incDamaged == 0:
-            current.incDamaged = randomizer(current.enemy.incDamage * current.difficulty)
+            current.incDamaged = randomizer(int(current.enemy.incDamage * current.difficulty))
     
         print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
 
@@ -203,7 +203,7 @@ def playerAttack():
 def enemyIncDamage():
     current.enemy.health -= current.enemy.incDamaged
 
-    print("The enemy took " + str(current.enemy.incDamaged) + " inmcremental damage.")
+    print("The enemy took " + str(current.enemy.incDamaged) + " incremental damage.")
 
     current.enemy.incDamaged = int(current.enemy.incDamaged / 2)
 
@@ -276,10 +276,21 @@ def encounter():
         enemyIncDamage()
         playerIncDamage()
 
-def skeletonRoom():
+def summon(enemy):
     global current
+
+    current.enemy = enemy
+    current.enemy.damage *= int(current.difficulty)
+    current.enemy.maxHealth *= int(current.difficulty)
+    current.enemy.health *= int(current.difficulty)
+    current.enemy.incDamage *= int(current.difficulty)
+    current.enemy.accuracy *= int(current.difficulty)
+    current.enemy.dodge *= int(current.difficulty)
+    current.enemy.defence *= int(current.difficulty)
+
+def skeletonRoom():
     
-    current.enemy = enemies.skeleton
+    summon(enemies.skeleton)
 
     print("You entered a room with a skeleton in it.")
 
@@ -293,9 +304,8 @@ def skeletonRoom():
         print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
 
 def stoneGolemRoom():
-    global current
 
-    current.enemy = enemies.stoneGolem
+    summon(enemies.stoneGolem)
 
     print("You entered a room with a stone golem in it.")
 
@@ -346,7 +356,8 @@ def libraryRoom():
 
 
 def getroom():
-    print("You are on room " + current.room + ".")
+    global current
+    print("You are on room " + str(current.room) + ".")
     current.room += 1
     current.difficulty += 0.1
     
@@ -354,7 +365,7 @@ def getroom():
 
     if roomSelect >= 1 and roomSelect <= 25:
         chestRoom()
-    elif roomSelect >=26 and roomSelect <= 20:
+    elif roomSelect >=26 and roomSelect <= 50:
         skeletonRoom()
     elif roomSelect >= 51 and roomSelect <= 75:
         stoneGolemRoom()

@@ -11,7 +11,7 @@ piercing = False
 thorns = 0
 incDamaged = 0
 room = base.room
-diffuculty = base.difficulty
+difficulty = base.difficulty
 
 
 class weapon:
