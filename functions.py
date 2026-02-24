@@ -159,7 +159,7 @@ def enemyAttack():
         current.health -= damage
 
         if current.incDamaged == 0:
-            current.incDamaged = current.enemy.incDamage
+            current.incDamaged = randomizer(current.enemy.incDamage)
     
         print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
 
@@ -171,10 +171,12 @@ def enemyAttack():
 def playerAttack():
     global current
 
-    if current.piercing == True:
-        damage = int(current.strength - (current.enemy.defence / 2))
+    tempStrength = randomizer(current.strength)
+
+    if current.piercing == True or tempStrength == (current.strength * 2):
+        damage = int(tempStrength - (current.enemy.defence / 2))
     else:
-        damage = int(current.strength - current.enemy.defence)
+        damage = int(tempStrength - current.enemy.defence)
     
     if damage <= 0:
         damage = 1
@@ -185,10 +187,13 @@ def playerAttack():
     else:
         current.enemy.health -= damage
 
-        print("You hit the enemy for " + str(damage) + " damage!")
+        if tempStrength == (current.strength * 2):
+            print("You scored a critical hit against the enemy and dealt " + str(damage) + " damage!")
+        else:
+            print("You hit the enemy for " + str(damage) + " damage!")
 
         if current.enemy.incDamaged == 0:
-            current.enemy.incDamaged = current.incDamage
+            current.enemy.incDamaged = randomizer(current.incDamage)
 
         if current.enemy.health <= 0:
             return "victory"
