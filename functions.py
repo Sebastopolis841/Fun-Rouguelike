@@ -144,30 +144,6 @@ def dodge(accuracy,dodge):
     else:
         return False
 
-def enemyAttack():
-    global current
-
-    damage = int(current.enemy.damage - current.defence)
-
-    if damage <= 0:
-        damage = 1
-
-    if dodge(current.enemy.accuracy,current.dodge) == True:
-        print("You dodged the enemy's attack and took 0 damage!")
-        return "N/A"
-    else:
-        current.health -= damage
-
-        if current.incDamaged == 0:
-            current.incDamaged = randomizer(int(current.enemy.incDamage * current.difficulty))
-    
-        print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
-
-        if current.health <= 0:
-            return "loss"
-        else:
-            return "N/A"
-
 def playerAttack():
     global current
 
@@ -199,6 +175,41 @@ def playerAttack():
             return "victory"
         else:
             return "N/A"
+        
+
+def enemyAttack(counter):
+    global current
+
+    tempDodge = current.dodge
+
+    damage = int(current.enemy.damage - current.defence)
+
+    if damage <= 0:
+        damage = 1
+    
+    if counter == True:
+        current.dodge = int(current.dodge * 1.5)
+
+    if dodge(current.enemy.accuracy,current.dodge) == True:
+        print("You dodged the enemy's attack and took 0 damage!")
+        if counter == True:
+            playerAttack()
+        return "N/A"
+    else:
+        current.health -= damage
+
+        if current.incDamaged == 0:
+            current.incDamaged = randomizer(int(current.enemy.incDamage * current.difficulty))
+    
+        print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
+
+        current.dodge = tempDodge
+
+        if current.health <= 0:
+            return "loss"
+        else:
+            return "N/A"
+
 
 def enemyIncDamage():
     current.enemy.health -= current.enemy.incDamaged
@@ -249,45 +260,59 @@ def encounter():
 
     while True:
         action = "N/A"
+        help = True
+        counter = False
 
-        action = input("Choose an action. \n A. Attack. \n B. Rest. \n C. Flee. \n D. Counter \n\n")
+        while help == True:
+            action = input("Choose an action. Add -h to the end to get a help page. \n A. Attack. \n B. Rest. \n C. Flee. \n D. Counter \n\n")
 
         if action.lower() == "a":
+            help = False
             result = playerAttack()
             if result == "victory":
                 print("You won the encounter!")
                 regen()
                 return "victory"
+        elif action.lower() == "a -h":
+            print("\n Attack: Attacks the enemy. \n")
+
         elif action.lower() == "b":
+            help = False
             rest()
+        elif action.lower() == "b -h":
+            print("\n Rest: Regenerates health.")
+
         elif action.lower() == "c":
+            help = False
             result = flee()
             if result == "escape":
                 regen()
                 return "escape"
+        elif action.lower() == "c -h":
+            print("Flee: Makes an attempt to escape the encounter based off of dodge.")
         elif action.lower() == "d":
+            help = False
             result = "counter"
+            counter = True
         else:
             print("Please select either \'A\', \'B\', or \'C\'")
         
-        if result == "counter":
-            tempDodge = current.dodge
-            current.dodge = int(current.dodge * 1.5)
+        result = enemyAttack(counter)
 
-            result = enemyAttack()
-            if result == "loss":
-                print("You lost. ):")
-                sys.exit()
-            current.dodge = tempDodge
-        else:
-            result = enemyAttack()
-            if result == "loss":
-                print("You lost. ):")
-                sys.exit()
+        if result == "loss":
+            print("You lost. ):")
+            sys.exit()
+        elif result == "victory":
+            print("You won the encounter!")
+            regen()
+            return "victory"
 
-        enemyIncDamage()
-        playerIncDamage()
 
+        if help == False:
+            enemyIncDamage()
+            playerIncDamage()
+
+        counter = False
 def summon(enemy):
     global current
 

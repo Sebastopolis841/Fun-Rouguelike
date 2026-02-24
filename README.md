@@ -10,6 +10,6 @@ This game is already playable, but I am still working on making it better. There
 
 Download the latest tested version of this game by clicking on the link below.
 
-To play, you have to run main.py. To do this, go to the game folder in the terminal and run 'python3 main.py'.
+To play, you have to run main.py. To do this, go to the game folder (usually ~/Downloads/battle\ game\ copy) in the terminal and run 'python3 main.py'.
 
 [Download here](https://github.com/Sebastopolis841/Fun-Rouguelike/archive/refs/heads/main.zip)
