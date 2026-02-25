@@ -273,6 +273,29 @@ def enemyAttack(counter):
         else:
             return "N/A"
 
+def friendAttack():
+    global current
+
+    name = current.friend.name
+    damage = current.friend.strength
+
+    if current.friend.alive == True:
+        if dodge(current.friend.accuracy,current.enemy.dodge) == True:
+            print("\nThe enemy dodged " + name + "\'s attack and took 0 damage.\n")
+            return "N/A"
+
+        else:
+            current.enemy.health -= damage
+            print()
+            print(name + " hit the skeleton for " + str(damage) + " damage! \n")
+
+            if current.enemy.health <= 0:
+                return "victory"
+        
+            else:
+                return "N/A"
+
+
 
 def enemyIncDamage():
     current.enemy.health -= current.enemy.incDamaged
@@ -372,6 +395,7 @@ def encounter():
             else:
                 print("Please select either \'A\', \'B\', or \'C\'")
         
+        
         result = enemyAttack(counter)
 
         if result == "loss":
@@ -379,6 +403,14 @@ def encounter():
             sys.exit()
 
         elif result == "victory":
+            print("You won the encounter!")
+            regen()
+            return "victory"
+        
+
+        result = friendAttack()
+
+        if result == "victory":
             print("You won the encounter!")
             regen()
             return "victory"

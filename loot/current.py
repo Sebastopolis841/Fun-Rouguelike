@@ -52,7 +52,7 @@ class friend:
 
     maxHealth = 0
     health = 0
-    damage = 0
+    strength = 0
     accuracy = 0
     dodge = 0
     alive = False
