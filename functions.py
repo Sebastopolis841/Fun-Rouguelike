@@ -8,6 +8,7 @@ import sys
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
     try:
         return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
+    
     except IndexError:
         return lootTable[-1]
 
@@ -23,6 +24,9 @@ def stoneGolem():
 def library():
     return loot(lootTables.libraryLoot.lootTable, lootTables.libraryLoot.extraSpace, current.luck, lootTables.libraryLoot.luckModifier)
 
+def friend():
+    return lootTables.friends[random.randint(0,len(lootTables.friends))]
+
 def healthBoost(loot):
     return int(loot.boost * current.defence)
 
@@ -33,29 +37,50 @@ def lootScan(loot):
         print("Damage = " + str(int(loot.damage * current.difficulty)))
         print("Incremental damage = " + str(int(loot.incDamage * current.difficulty)))
         print("Piercing = " + str(int(loot.piercing * current.difficulty)))
+
     elif loot.type == "boots":
         print("Defence = " + str(int(loot.defence * current.difficulty)))
         print("Dodge = " + str(int(loot.dodge * current.difficulty)))
+
     elif loot.type == "pants" or loot.type == "helmet":
         print("Defence = " + str(int(loot.defence * current.difficulty)))
+
     elif loot.type == "chestplate":
         print("Defence = " + str(int(loot.defence * current.difficulty)))
         print("Thorns = " + str(int(loot.thorns * current.difficulty)))
+
     elif loot.type == "amulet":
         try:
             print("Dodge = " + str(int(loot.dodge * current.difficulty)))
         except AttributeError:
             pass
+
         try:
             print("Incremental damage = " + str(int(loot.incDamage * current.difficulty)))
         except AttributeError:
             pass
+
         try:
             print("Damage = " +str(int(loot.damage * current.difficulty)))
         except AttributeError:
             pass
+
     elif loot.type == "health":
         print("Increases health by " + str(int(healthBoost(loot) * current.difficulty)))
+
+def friendScan(friend):
+    global current
+
+    print("You found " + friend.name + "! \n")
+    print("Strength: " + friend.strength)
+    print("Health: " + friend.maxHealth)
+    print("Accuracy: " + friend.accuracy)
+    print("Dodge: " + friend.dodge)
+
+def friendEquip(friend):
+    current.friend = friend
+
+    print("\nSuccessfully befriended " + friend.name + "!\n")
 
 def lootEquip(loot):
     global current
@@ -65,33 +90,45 @@ def lootEquip(loot):
         current.weapon.damage = int(loot.damage * current.difficulty)
         current.weapon.incDamage = int(loot.damage * current.difficulty)
         current.weapon.piercing = int(loot.piercing * current.difficulty)
+
     elif loot.type == "boots":
         current.boots.defence = int(loot.defence * current.difficulty)
         current.boots.dodge = int(loot.dodge * current.difficulty)
+
     elif loot.type == "pants":
         current.pants.defence = int(loot.defence * current.difficulty)
+
     elif loot.type == "helmet":
         current.helmet.defence = int(loot.defence * current.difficulty)
+
     elif loot.type == "chestplate":
         current.chestplate.defence = int(loot.defence * current.difficulty)
         current.chestplate.thorns = int(loot.thorns * current.difficulty)
+
     elif loot.type == "amulet":
         try:
             current.amulet.dodge = int(loot.dodge * current.difficulty)
+
         except AttributeError:
             current.amulet.dodge = 0
+
         try:
             current.amulet.incDamage = int(loot.incDamage * current.difficulty)
+
         except AttributeError:
             current.amulet.incDamage = 0
+
         try:
             current.amulet.damage = int(loot.damage * current.difficulty)
+
         except AttributeError:
             current.amulet.damage = 0
+
     elif loot.type == "health":
         boost = int(healthBoost(loot) * current.difficulty)
         current.health += boost
         base.health += boost
+
     else:
         print("There was an error loading your loot.")
     
@@ -113,6 +150,20 @@ def lootEquip(loot):
     print("Max health: " + str(base.health))
     print("Health: " + str(current.health))
 
+def friendAsk(friend):
+    equip = "N/A"
+    while equip.lower() != "n" and equip.lower() != "y":
+        equip = input("Would you like to befriend this NPC? (You may only have 1 friend at a time) (y/n) ")
+
+        if equip.lower() == "y":
+            friendEquip(friend)
+
+        elif equip.lower() == "n":
+            print("You have chosen not to befriend this NPC. \n")
+
+        else:
+            print("Please use \'y\' for yes and \'n\' for no. \n")
+
 def lootAsk(loot):
     equip = "N/A"
     while equip.lower() != "n" and equip.lower() != "y":
@@ -123,8 +174,13 @@ def lootAsk(loot):
 
         elif equip.lower() == "n":
             print("You have chosen not to equip this item. \n")
+
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")
+
+def friendSet(friend):
+    friendScan(friend)
+    friendAsk(friend)
 
 def lootRetrieve(loot):
     lootScan(loot)
@@ -141,6 +197,7 @@ def randomizer(stat):
 def dodge(accuracy,dodge):
     if randomizer(dodge) > randomizer(accuracy):
         return True
+    
     else:
         return False
 
@@ -151,6 +208,7 @@ def playerAttack():
 
     if current.piercing == True or tempStrength == (current.strength * 2):
         damage = int(tempStrength - (current.enemy.defence / 2))
+
     else:
         damage = int(tempStrength - current.enemy.defence)
     
@@ -160,11 +218,13 @@ def playerAttack():
     if dodge(current.accuracy,current.enemy.dodge) == True:
         print("The enemy dodged and took 0 damage")
         return "N/A"
+    
     else:
         current.enemy.health -= damage
 
         if tempStrength == (current.strength * 2):
             print("You scored a critical hit against the enemy and dealt " + str(damage) + " damage!")
+
         else:
             print("You hit the enemy for " + str(damage) + " damage!")
 
@@ -173,6 +233,7 @@ def playerAttack():
 
         if current.enemy.health <= 0:
             return "victory"
+        
         else:
             return "N/A"
 
@@ -192,9 +253,11 @@ def enemyAttack(counter):
 
     if dodge(current.enemy.accuracy,current.dodge) == True:
         print("You dodged the enemy's attack and took 0 damage!")
+
         if counter == True:
             playerAttack()
         return "N/A"
+    
     else:
         current.health -= damage
 
@@ -220,6 +283,7 @@ def enemyIncDamage():
 
     if current.enemy.health <= 0:
         return "victory"
+    
     else:
         return "N/A"
 
@@ -232,6 +296,7 @@ def playerIncDamage():
 
     if current.health <= 0:
         return "loss"
+    
     else:
         return "N/A"
 
@@ -272,13 +337,16 @@ def encounter():
                     print("You won the encounter!")
                     regen()
                     return "victory"
+                
                 help = False
+
             elif action.lower() == "a -h":
                 print("\n Attack: Attacks the enemy. \n")
 
             elif action.lower() == "b":
                 rest()
                 help = False
+
             elif action.lower() == "b -h":
                 print("\n Rest: Regenerates health.")
 
@@ -287,15 +355,20 @@ def encounter():
                 if result == "escape":
                     regen()
                     return "escape"
+                
                 help = False
+
             elif action.lower() == "c -h":
                 print("\n Flee: Makes an attempt to escape the encounter based off of dodge. \n")
+
             elif action.lower() == "d":
                 result = "counter"
                 counter = True
                 help = False
+
             elif action.lower() == "d -h":
                 print("\n Counter: Increases dodge for a turn. If you dodge successfully, then you get to counterattack. \n")
+
             else:
                 print("Please select either \'A\', \'B\', or \'C\'")
         
@@ -304,6 +377,7 @@ def encounter():
         if result == "loss":
             print("You lost. ):")
             sys.exit()
+
         elif result == "victory":
             print("You won the encounter!")
             regen()
@@ -326,6 +400,29 @@ def summon(enemy):
     current.enemy.dodge *= int(current.difficulty)
     current.enemy.defence *= int(current.difficulty)
 
+def cottage():
+    action = "N/A"
+    while action.lower() != "a" and action.lower() != "b":
+        action = input("You entered a well-lit living space. What would you like to do? \n A. Look around. \n B. Leave. \n\n")
+        print()
+
+        if action.lower() == "a":
+            NPC = friend()
+            friendSet(NPC)
+
+            print()
+
+        elif action.lower() == "b":
+            break
+
+        else:
+            print("Please select either \'A\' or \'B\'.")
+
+    NPC = friend()
+
+    friendScan(NPC)
+    friendAsk(NPC)
+
 def skeletonRoom():
     
     summon(enemies.skeleton)
@@ -338,6 +435,7 @@ def skeletonRoom():
         print("You got some loot! \n")
         loot = skeleton()
         lootRetrieve(loot)
+
     else:
         print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
 
@@ -353,6 +451,7 @@ def stoneGolemRoom():
         print("You got some loot! \n")
         loot = stoneGolem()
         lootRetrieve(loot)
+
     else:
         print("You managed to escape the room! You were unfortunately unable to retrieve any loot.")
 
@@ -403,31 +502,51 @@ def getroom():
     roomSelect = random.randint(1, 100)
 
     if current.room < 15:
-        if roomSelect >= 1 and roomSelect <= 40:
+        if roomSelect >= 1 and roomSelect <= 30:
             chestRoom()
-        elif roomSelect >=41 and roomSelect <= 80:
+
+        elif roomSelect >= 31 and roomSelect <= 60:
             skeletonRoom()
-        elif roomSelect >= 81 and roomSelect <= 90:
+        
+        elif roomSelect >= 61 and roomSelect <= 90:
+            cottage()
+
+        elif roomSelect >= 91 and roomSelect <= 95:
             stoneGolemRoom()
-        elif roomSelect >= 91 and roomSelect <= 100:
+
+        elif roomSelect >= 96 and roomSelect <= 100:
             libraryRoom()
+
 
     elif current.room < 30:
-        if roomSelect >= 1 and roomSelect <= 25:
-            chestRoom()
-        elif roomSelect >=26 and roomSelect <= 50:
-            skeletonRoom()
-        elif roomSelect >= 51 and roomSelect <= 75:
-            stoneGolemRoom()
-        elif roomSelect >= 76 and roomSelect <= 100:
-            libraryRoom()
-
-    else:
         if roomSelect >= 1 and roomSelect <= 20:
             chestRoom()
-        elif roomSelect >=21 and roomSelect <= 40:
+
+        elif roomSelect >= 21 and roomSelect <= 40:
             skeletonRoom()
-        elif roomSelect >= 41 and roomSelect <= 70:
+        
+        elif roomSelect >= 41 and roomSelect <= 60:
+            cottage()
+
+        elif roomSelect >= 61 and roomSelect <= 80:
             stoneGolemRoom()
-        elif roomSelect >= 71 and roomSelect <= 100:
+
+        elif roomSelect >= 81 and roomSelect <= 100:
+            libraryRoom()
+
+
+    else:
+        if roomSelect >= 1 and roomSelect <= 10:
+            chestRoom()
+
+        elif roomSelect >= 11 and roomSelect <= 20:
+            skeletonRoom()
+        
+        elif roomSelect >= 21 and roomSelect <= 30:
+            cottage()
+
+        elif roomSelect >= 31 and roomSelect <= 65:
+            stoneGolemRoom()
+
+        elif roomSelect >= 66 and roomSelect <= 100:
             libraryRoom()

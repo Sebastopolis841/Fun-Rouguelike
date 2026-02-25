@@ -2,6 +2,7 @@ import loot.chest as chest
 import loot.skeleton as skeleton
 import loot.stoneGolem as stoneGolem
 import loot.library as library
+import friends
 
 class chestLoot:
     lootTable = [
@@ -91,3 +92,7 @@ class libraryLoot:
     extraSpace = 3
 
     luckModifier  = 0.3
+
+friends = [
+    friends.dog
+]

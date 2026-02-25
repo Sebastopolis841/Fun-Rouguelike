@@ -48,6 +48,8 @@ class enemy:
     incDamaged = 0
 
 class friend:
+    name = "N/A"
+
     maxHealth = 0
     health = 0
     damage = 0
