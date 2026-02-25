@@ -25,7 +25,7 @@ def library():
     return loot(lootTables.libraryLoot.lootTable, lootTables.libraryLoot.extraSpace, current.luck, lootTables.libraryLoot.luckModifier)
 
 def friend():
-    return lootTables.friends[random.randint(0,len(lootTables.friends))]
+    return lootTables.friends[random.randint(0,(len(lootTables.friends) - 1))]
 
 def healthBoost(loot):
     return int(loot.boost * current.defence)
@@ -71,11 +71,11 @@ def lootScan(loot):
 def friendScan(friend):
     global current
 
-    print("You found " + friend.name + "! \n")
-    print("Strength: " + friend.strength)
-    print("Health: " + friend.maxHealth)
-    print("Accuracy: " + friend.accuracy)
-    print("Dodge: " + friend.dodge)
+    print("You found " + str(friend.name) + "! \n")
+    print("Strength: " + str(friend.strength))
+    print("Health: " + str(friend.maxHealth))
+    print("Accuracy: " + str(friend.accuracy))
+    print("Dodge: " + str(friend.dodge))
 
 def friendEquip(friend):
     current.friend = friend
@@ -153,13 +153,13 @@ def lootEquip(loot):
 def friendAsk(friend):
     equip = "N/A"
     while equip.lower() != "n" and equip.lower() != "y":
-        equip = input("Would you like to befriend this NPC? (You may only have 1 friend at a time) (y/n) ")
+        equip = input("Would you like to befriend this character? (You may only have 1 friend at a time) (y/n) ")
 
         if equip.lower() == "y":
             friendEquip(friend)
 
         elif equip.lower() == "n":
-            print("You have chosen not to befriend this NPC. \n")
+            print("You have chosen not to befriend this character. \n")
 
         else:
             print("Please use \'y\' for yes and \'n\' for no. \n")
