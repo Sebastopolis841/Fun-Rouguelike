@@ -6,32 +6,37 @@ def statsBase():
         global defence
         global dodge
         global accuracy
+        global health
+        global room
+        global difficulty
 
         keepStats = "N/A"
-        statPoints = 14
+        statPoints = 20
         strength = 1
         defence = 1
         dodge = 1
         accuracy = 1
 
+        maxPoints = statPoints - 4
+
         print()
         print()
 
-        print("You have 14 stat points to spend.")
+        print("You have " + str(statPoints) + " stat points to spend.")
         print("These can be put into 5 attributes: Strength, Luck, Defence, Dodge and Accuracy \n")
-        print("Each stat except for luck must be given 1 stat point, so you have 15 left to use.")
+        print("Each stat except for luck must be given 1 stat point.")
 
         print()
 
         while goodStats == False:
             try:
                 strength = int(input("You have " + str(statPoints) + " points left. How many points to put into strength: "))
-                if strength >= 1 and strength <= 11:
+                if strength >= 1 and strength <= maxPoints:
                     statPoints -= strength
 
                     goodStats = True
                 else:
-                    print("Please select a number between 1 and 11 inclusive. \n")
+                    print("Please select a number between 1 and " + str(maxPoints) +" inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
@@ -40,12 +45,12 @@ def statsBase():
         while goodStats == False:
             try:
                 luck = int(input("You have " + str(statPoints) + " points left. How many points to put into luck: "))
-                if luck >= 0 and luck <= 11:
+                if luck >= 0 and luck <= maxPoints:
                     statPoints -= luck
 
                     goodStats = True
                 else:
-                    print("Please select a number between 0 and 11 inclusive. \n")
+                    print("Please select a number between 1 and " + str(maxPoints) +" inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
 
@@ -54,12 +59,12 @@ def statsBase():
         while goodStats == False:
             try:
                 defence = int(input("You have " + str(statPoints) + " points left. How many points to put into defence: "))
-                if defence >= 1 and defence <= 11:
+                if defence >= 1 and defence <= maxPoints:
                     statPoints -= defence
 
                     goodStats = True
                 else:
-                    print("Please select a number between 1 and 11 inclusive. \n")
+                    print("Please select a number between 1 and " + str(maxPoints) +" inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
@@ -68,12 +73,12 @@ def statsBase():
         while goodStats == False:
             try:
                 dodge = int(input("You have " + str(statPoints) + " points left. How many points to put into dodge: "))
-                if dodge >= 1 and dodge <= 11:
+                if dodge >= 1 and dodge <= maxPoints:
                     statPoints -= dodge
                 
                     goodStats = True
                 else:
-                    print("Please select a number between 1 and 11 inclusive. \n")
+                    print("Please select a number between 1 and " + str(maxPoints) +" inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
@@ -82,9 +87,12 @@ def statsBase():
         while goodStats == False:
             try:
                 accuracy = int(input("You have " + str(statPoints) + " points left. How many points to put into accuracy: "))
-                statPoints -= accuracy
+                if accuracy >= 1 and accuracy <= maxPoints:
+                    statPoints -= accuracy
                 
-                goodStats = True
+                    goodStats = True
+                else:
+                    print("Please select a number between 1 and " + str(maxPoints) +" inclusive. \n")
             except ValueError:
                 print("No integer selected. Try again. \n")
             
@@ -115,8 +123,8 @@ def statsBase():
         else:
             print("Your stat points have been improperly distributed. Please redistribute stats.")
 
-statsBase()
+        health = 10 + defence
+        room = 1
+        difficulty = 1
 
-health = 10 + defence
-room = 1
-difficulty = 1
+statsBase()

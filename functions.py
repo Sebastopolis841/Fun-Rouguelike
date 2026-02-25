@@ -255,7 +255,8 @@ def enemyAttack(counter):
         print("You dodged the enemy's attack and took 0 damage!")
 
         if counter == True:
-            playerAttack()
+            return playerAttack()
+        
         return "N/A"
     
     else:
@@ -395,7 +396,7 @@ def encounter():
             else:
                 print("Please select either \'A\', \'B\', or \'C\'")
         
-        
+
         result = enemyAttack(counter)
 
         if result == "loss":
