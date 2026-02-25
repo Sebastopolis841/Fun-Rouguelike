@@ -7,4 +7,4 @@ while True:
         while True:
             functions.getroom()
     except KeyboardInterrupt:
-        print("\n\nThere is no escape...\n")
+        functions.goodbye()

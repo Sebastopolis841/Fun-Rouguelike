@@ -5,6 +5,10 @@ import base
 import enemies
 import sys
 
+def goodbye():
+    print("\n\n Goodbye!")
+    sys.exit()
+
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
     try:
         return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]

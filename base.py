@@ -1,3 +1,5 @@
+import functions
+
 def statsBase():
     goodStats = False
     while goodStats == False:
@@ -127,4 +129,7 @@ def statsBase():
         room = 1
         difficulty = 1
 
-statsBase()
+try:
+    statsBase()
+except KeyboardInterrupt:
+    functions.goodbye
