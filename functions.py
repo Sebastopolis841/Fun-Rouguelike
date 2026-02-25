@@ -246,37 +246,65 @@ def enemyAttack(counter):
     global current
 
     tempDodge = current.dodge
+    target = random.randint(1,2)
 
-    damage = int(current.enemy.damage - current.defence)
+    if target == 1 or current.friend.alive == False:
+        damage = int(current.enemy.damage - current.defence)
 
-    if damage <= 0:
-        damage = 1
+        if damage <= 0:
+            damage = 1
     
-    if counter == True:
-        current.dodge = int(current.dodge * 1.5)
-
-    if dodge(current.enemy.accuracy,current.dodge) == True:
-        print("You dodged the enemy's attack and took 0 damage!")
-
         if counter == True:
-            return playerAttack()
+            current.dodge = int(current.dodge * 1.5)
+
+        if dodge(current.enemy.accuracy,current.dodge) == True:
+            print("You dodged the enemy's attack and took 0 damage!")
+
+            if counter == True:
+                return playerAttack()
         
-        return "N/A"
-    
-    else:
-        current.health -= damage
-
-        if current.incDamaged == 0:
-            current.incDamaged = randomizer(int(current.enemy.incDamage * current.difficulty))
-    
-        print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
-
-        current.dodge = tempDodge
-
-        if current.health <= 0:
-            return "loss"
-        else:
             return "N/A"
+    
+        else:
+            current.health -= damage
+
+            if current.incDamaged == 0:
+                current.incDamaged = randomizer(int(current.enemy.incDamage * current.difficulty))
+    
+            print("You got hit for " + str(damage) + " damage \n New health: " + str(current.health))
+
+            current.dodge = tempDodge
+
+            if current.health <= 0:
+                return "loss"
+            else:
+                return "N/A"
+            
+    elif target == 2 and current.friend.alive == True:
+        damage = int(current.enemy.damage / 2)
+        name = current.friend.name
+
+        if damage <= 0:
+            damage = 1
+        
+        if counter == True:
+            print("\nYou attempted a counterattack, but the enemy attacked " + name + " instead.")
+
+        if dodge(current.enemy.accuracy,current.friend.dodge) == True:
+            print(name + " dodged the enemy's attack and took 0 damage.")
+            
+            return "N/A"
+        
+        else:
+            current.friend.health -= damage
+
+            print(name + " got hit for " + str(damage) + " damage \n New Health: " + str(current.friend.health))
+
+            if current.friend.health <= 0:
+                return "friendLoss"
+            else:
+                return "N/A"
+
 
 def friendAttack():
     global current
@@ -347,6 +375,20 @@ def flee():
     if chance <= current.dodge:
         return "escape"
 
+def victory():
+    global current
+
+    print("You won the encounter!")
+    regen()
+
+    if current.friend.name != "N/A":
+        current.friend.alive = True
+        current.friend.health = current.friend.maxHealth
+
+        print(current.friend.name + " was restored to full health!")
+
+    return "victory"
+
 def encounter():
     global current
     result = "N/A"
@@ -362,9 +404,7 @@ def encounter():
             if action.lower() == "a":
                 result = playerAttack()
                 if result == "victory":
-                    print("You won the encounter!")
-                    regen()
-                    return "victory"
+                    victory()
                 
                 help = False
 
@@ -408,17 +448,16 @@ def encounter():
             sys.exit()
 
         elif result == "victory":
-            print("You won the encounter!")
-            regen()
-            return "victory"
+                    victory()
+        
+        elif result == "friendLoss":
+            print(current.friend.name + " was defeated. They will respawn next in the next room.")
         
 
         result = friendAttack()
 
         if result == "victory":
-            print("You won the encounter!")
-            regen()
-            return "victory"
+            victory()
 
 
         enemyIncDamage()
@@ -454,11 +493,6 @@ def cottage():
 
         else:
             print("Please select either \'A\' or \'B\'.")
-
-    NPC = friend()
-
-    friendScan(NPC)
-    friendAsk(NPC)
 
 def skeletonRoom():
     
