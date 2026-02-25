@@ -8,7 +8,7 @@ class skeleton:
     damage = 6
     incDamage = 0
     accuracy = 8
-    dodge = 4
+    dodge = 2
     incDamaged = 0
     defence = 1
 

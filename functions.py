@@ -175,7 +175,7 @@ def playerAttack():
             return "victory"
         else:
             return "N/A"
-        
+
 
 def enemyAttack(counter):
     global current
@@ -264,40 +264,40 @@ def encounter():
         counter = False
 
         while help == True:
-            action = input("Choose an action. Add -h to the end to get a help page. \n A. Attack. \n B. Rest. \n C. Flee. \n D. Counter \n\n")
+            action = input("\nChoose an action. Add -h to the end to get a help page. \n A. Attack. \n B. Rest. \n C. Flee. \n D. Counter \n\n")
 
-        if action.lower() == "a":
-            help = False
-            result = playerAttack()
-            if result == "victory":
-                print("You won the encounter!")
-                regen()
-                return "victory"
-        elif action.lower() == "a -h":
-            print("\n Attack: Attacks the enemy. \n")
+            if action.lower() == "a":
+                result = playerAttack()
+                if result == "victory":
+                    print("You won the encounter!")
+                    regen()
+                    return "victory"
+                help = False
+            elif action.lower() == "a -h":
+                print("\n Attack: Attacks the enemy. \n")
 
-        elif action.lower() == "b":
-            help = False
-            rest()
-        elif action.lower() == "b -h":
-            print("\n Rest: Regenerates health.")
+            elif action.lower() == "b":
+                rest()
+                help = False
+            elif action.lower() == "b -h":
+                print("\n Rest: Regenerates health.")
 
-        elif action.lower() == "c":
-            help = False
-            result = flee()
-            if result == "escape":
-                regen()
-                return "escape"
-        elif action.lower() == "c -h":
-            print("\n Flee: Makes an attempt to escape the encounter based off of dodge. \n")
-        elif action.lower() == "d":
-            help = False
-            result = "counter"
-            counter = True
-        elif action.lower() == "d -h":
-            print("\n Counter: Increases dodge for a turn. If you dodge successfully, then you get to counterattack. \n")
-        else:
-            print("Please select either \'A\', \'B\', or \'C\'")
+            elif action.lower() == "c":
+                result = flee()
+                if result == "escape":
+                    regen()
+                    return "escape"
+                help = False
+            elif action.lower() == "c -h":
+                print("\n Flee: Makes an attempt to escape the encounter based off of dodge. \n")
+            elif action.lower() == "d":
+                result = "counter"
+                counter = True
+                help = False
+            elif action.lower() == "d -h":
+                print("\n Counter: Increases dodge for a turn. If you dodge successfully, then you get to counterattack. \n")
+            else:
+                print("Please select either \'A\', \'B\', or \'C\'")
         
         result = enemyAttack(counter)
 
@@ -310,9 +310,8 @@ def encounter():
             return "victory"
 
 
-        if help == False:
-            enemyIncDamage()
-            playerIncDamage()
+        enemyIncDamage()
+        playerIncDamage()
 
         counter = False
 def summon(enemy):
@@ -396,6 +395,7 @@ def libraryRoom():
 
 def getroom():
     global current
+    print()
     print("You are on room " + str(current.room) + ".")
     current.room += 1
     current.difficulty += 0.1
