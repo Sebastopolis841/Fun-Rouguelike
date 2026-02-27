@@ -84,7 +84,7 @@ def friendScan(friend):
 def friendEquip(friend):
     current.friend = friend
 
-    current.friend.name = input("What would you like to name this " + friend.name "? ") 
+    current.friend.name = input("What would you like to name this " + friend.name + "? ")
 
     print("\nSuccessfully befriended " + friend.name + "!\n")
 
