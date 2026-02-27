@@ -1,4 +1,4 @@
-import functions
+import sys
 
 def statsBase():
     goodStats = False
@@ -132,4 +132,5 @@ def statsBase():
 try:
     statsBase()
 except KeyboardInterrupt:
-    functions.goodbye
+    print("\n\n Goodbye!")
+    sys.exit()
