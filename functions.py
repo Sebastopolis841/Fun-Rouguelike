@@ -75,7 +75,7 @@ def lootScan(loot):
 def friendScan(friend):
     global current
 
-    print("You found " + str(friend.name) + "! \n")
+    print("You found a " + str(friend.name) + "! \n")
     print("Strength: " + str(friend.strength))
     print("Health: " + str(friend.maxHealth))
     print("Accuracy: " + str(friend.accuracy))
@@ -83,6 +83,8 @@ def friendScan(friend):
 
 def friendEquip(friend):
     current.friend = friend
+
+    current.friend.name = input("What would you like to name this " + friend.name "? ") 
 
     print("\nSuccessfully befriended " + friend.name + "!\n")
 
