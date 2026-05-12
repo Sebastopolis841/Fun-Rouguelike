@@ -1,4 +1,4 @@
-import sys
+from sys import exit
 
 def statsBase():
     goodStats = False
@@ -133,4 +133,4 @@ try:
     statsBase()
 except KeyboardInterrupt:
     print("\n\n Goodbye!")
-    sys.exit()
+    exit()

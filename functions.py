@@ -1,17 +1,17 @@
-import random
+from random import randint
 import lootTables
 import loot.current as current
 import base
 import enemies
-import sys
+from sys import exit
 
 def goodbye():
     print("\n\n Goodbye!")
-    sys.exit()
+    exit()
 
 def loot(lootTable, lootExtraSpace, luck, luckModifier):
     try:
-        return lootTable[((random.randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
+        return lootTable[((randint(0, (len(lootTable) - lootExtraSpace))) + int(luck * luckModifier))]
     
     except IndexError:
         return lootTable[-1]
@@ -29,7 +29,7 @@ def library():
     return loot(lootTables.libraryLoot.lootTable, lootTables.libraryLoot.extraSpace, current.luck, lootTables.libraryLoot.luckModifier)
 
 def friend():
-    return lootTables.friends[random.randint(0,(len(lootTables.friends) - 1))]
+    return lootTables.friends[randint(0,(len(lootTables.friends) - 1))]
 
 def healthBoost(loot):
     return int(loot.boost * current.defence)
@@ -196,7 +196,7 @@ def randomizer(stat):
     randomizerLow = stat / 2
     randomizerHigh = stat * 2
     
-    tempstat = random.randint(int(randomizerLow), randomizerHigh)
+    tempstat = randint(int(randomizerLow), randomizerHigh)
 
     return tempstat
 
@@ -248,7 +248,7 @@ def enemyAttack(counter):
     global current
 
     tempDodge = current.dodge
-    target = random.randint(1,2)
+    target = randint(1,2)
 
     if target == 1 or current.friend.alive == False:
         damage = int(current.enemy.damage - current.defence)
@@ -373,7 +373,7 @@ def regen():
     base.health += int(current.defence/2)
 
 def flee():
-    chance = random.randint(1,10)
+    chance = randint(1,10)
     if chance <= current.dodge:
         return "escape"
 
@@ -447,7 +447,7 @@ def encounter():
 
         if result == "loss":
             print("You lost. ):")
-            sys.exit()
+            exit()
 
         elif result == "victory":
                     victory()
@@ -572,7 +572,7 @@ def getroom():
     current.room += 1
     current.difficulty += 0.1
     
-    roomSelect = random.randint(1, 100)
+    roomSelect = randint(1, 100)
 
     if current.room < 15:
         if roomSelect >= 1 and roomSelect <= 30:
